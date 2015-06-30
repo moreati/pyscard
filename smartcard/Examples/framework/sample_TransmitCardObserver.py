@@ -25,7 +25,6 @@ along with pyscard; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 from __future__ import print_function
-from sys import stdin, exc_info
 from time import sleep
 
 from smartcard.CardMonitoring import CardMonitor, CardObserver
@@ -59,7 +58,7 @@ class transmitobserver(CardObserver):
             if card in self.cards:
                 self.cards.remove(card)
 
-try:
+if __name__ == '__main__':
     print("Insert or remove a smartcard in the system.")
     print("This program will exit in 100 seconds")
     print("")
@@ -68,6 +67,3 @@ try:
     cardmonitor.addObserver(cardobserver)
 
     sleep(100)
-
-except:
-    print(exc_info()[0], ':', exc_info()[1])

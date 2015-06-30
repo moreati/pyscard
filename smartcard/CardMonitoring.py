@@ -29,9 +29,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 
 from __future__ import print_function
-from sys import exc_info
 from threading import Thread, Event
 from time import sleep
+import traceback
 
 from smartcard.System import readers
 from smartcard.Exceptions import CardRequestTimeoutException
@@ -190,13 +190,8 @@ class CardMonitoringThread(object):
                     pass
 
                 except:
-                    try:
-                        import sys
-                        print(sys.exc_info()[1])
-                        print(sys.exc_info()[2])
-                        print(sys.exc_info()[0])
-                    except:
-                        pass
+                    # FIXME Tighten the exceptions caught by this block
+                    traceback.print_exc()
 
         # stop the thread by signaling stopEvent
         def stop(self):

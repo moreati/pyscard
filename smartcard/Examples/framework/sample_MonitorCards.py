@@ -25,7 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 
 from __future__ import print_function
-from sys import stdin, exc_info
 from time import sleep
 
 from smartcard.CardMonitoring import CardMonitor, CardObserver
@@ -46,7 +45,7 @@ class printobserver(CardObserver):
         for card in removedcards:
             print("-Removed: ", toHexString(card.atr))
 
-try:
+if __name__ == '__main__':
     print("Insert or remove a smartcard in the system.")
     print("This program will exit in 10 seconds")
     print("")
@@ -64,6 +63,3 @@ try:
     if 'win32' == sys.platform:
         print('press Enter to continue')
         sys.stdin.read(1)
-
-except:
-    print(exc_info()[0], ':', exc_info()[1])

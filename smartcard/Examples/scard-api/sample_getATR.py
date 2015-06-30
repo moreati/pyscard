@@ -30,7 +30,7 @@ from __future__ import print_function
 from smartcard.scard import *
 import smartcard.util
 
-try:
+if __name__ == '__main__':
     hresult, hcontext = SCardEstablishContext(SCARD_SCOPE_USER)
     if hresult != SCARD_S_SUCCESS:
         raise error(
@@ -86,9 +86,6 @@ try:
             raise error('Failed to release context: ' + \
                             SCardGetErrorMessage(hresult))
         print('Released context.')
-
-except Exception as e:
-    print(e)
 
 import sys
 if 'win32' == sys.platform:

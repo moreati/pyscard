@@ -30,7 +30,11 @@ import uuid
 
 
 def strToGUID(s):
-    """Converts a GUID string into a list of bytes."""
+    """Converts a GUID string into a list of bytes.
+
+    >>> strToGUID('{AD4F1667-EA75-4124-84D4-641B3B197C65}')
+    [103, 22, 79, 173, 117, 234, 36, 65, 132, 212, 100, 27, 59, 25, 124, 101]
+    """
     dat = uuid.UUID(hex=s)
     if isinstance(dat.bytes_le, str):
         # Python 2
@@ -42,7 +46,12 @@ def strToGUID(s):
 
 
 def GUIDToStr(g):
-    """Converts a GUID sequence of bytes into a string."""
+    """Converts a GUID sequence of bytes into a string.
+
+    >>> GUIDToStr([103,22,79,173,  117,234,  36,65,
+    ...            132, 212, 100, 27, 59, 25, 124, 101])
+    '{AD4F1667-EA75-4124-84D4-641B3B197C65}'
+    """
     try:
         dat = uuid.UUID(bytes_le=bytes(g))
     except:

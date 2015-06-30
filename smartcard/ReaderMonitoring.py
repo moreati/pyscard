@@ -29,9 +29,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 
 from __future__ import print_function
-from sys import exc_info
 from threading import Thread, Event, enumerate
 from time import sleep
+import traceback
 
 import smartcard.System
 from smartcard.Exceptions import ListReadersException
@@ -191,6 +191,8 @@ class ReaderMonitoringThread(Thread):
                 self.stopEvent.wait(self.period)
 
             except Exception:
+                # FIXME Tighten the exceptions caught by this block
+                traceback.print_exc()
                 # Most likely raised during interpreter shutdown due
                 # to unclean exit which failed to remove all observers.
                 # To solve this, we set the stop event and pass the
