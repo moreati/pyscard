@@ -49,11 +49,14 @@ install:
   - choco install -y swig
   - "powershell appveyor\\install.ps1"
 
+  - "%WITH_COMPILER% %PYTHON%/Scripts/pip install -r dev-requirements.txt"
+  - "%WITH_COMPILER% %PYTHON%/Scripts/pip install ."
+
 build: off
 
 test_script:
-  #- "%WITH_COMPILER% %PYTHON%/python setup.py test"
-  - echo Skipped
+  - "%WITH_COMPILER% %PYTHON%/Scripts/coverage run setup.py test"
+  - "%WITH_COMPILER% %PYTHON%/Scripts/coverage report"
 
 after_test:
   - "%WITH_COMPILER% %PYTHON%/python setup.py bdist_wheel"
